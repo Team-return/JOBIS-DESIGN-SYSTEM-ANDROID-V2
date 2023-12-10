@@ -1,4 +1,4 @@
-package team.returm.jobisdesignsystemv2.ui.theme
+package team.returm.jobisdesignsystemv2.foundation
 
 import android.app.Activity
 import android.os.Build

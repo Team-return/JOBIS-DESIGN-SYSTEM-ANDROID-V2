@@ -1,4 +1,4 @@
-package team.returm.jobisdesignsystemv2.ui.theme
+package team.returm.jobisdesignsystemv2.foundation
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

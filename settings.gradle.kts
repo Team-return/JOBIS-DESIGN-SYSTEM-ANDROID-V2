@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JobisDesignSystemV2"
 include(":app")
- 
+include(":jobisdesignsystemv2")
