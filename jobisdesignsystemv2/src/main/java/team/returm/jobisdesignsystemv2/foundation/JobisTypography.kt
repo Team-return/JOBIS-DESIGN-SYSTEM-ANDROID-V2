@@ -11,16 +11,16 @@ import team.returm.jobisdesignsystemv2.R
 private val NotosansFamily = FontFamily(
     listOf(
         Font(
-            resId = R.font.notosans_bold,
+            resId = R.font.pretendard_bold,
             weight = FontWeight.Bold,
         ),
         Font(
-            resId = R.font.notosans_medium,
+            resId = R.font.pretendard_medium,
             weight = FontWeight.Medium,
         ),
         Font(
-            resId = R.font.notosans_regular,
-            weight = FontWeight.Normal,
+            resId = R.font.pretendard_semi_bold,
+            weight = FontWeight.SemiBold,
         ),
     ),
 )
