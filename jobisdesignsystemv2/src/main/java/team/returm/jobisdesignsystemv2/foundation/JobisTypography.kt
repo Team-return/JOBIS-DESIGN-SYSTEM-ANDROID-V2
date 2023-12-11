@@ -22,7 +22,7 @@ private val NotosansFamily = FontFamily(
             resId = R.font.notosans_regular,
             weight = FontWeight.Normal,
         ),
-    )
+    ),
 )
 
 private val platFormTextStyle = PlatformTextStyle(
