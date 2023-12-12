@@ -2,6 +2,9 @@ package team.returm.jobisdesignsystemv2.foundation
 
 import androidx.compose.ui.graphics.Color
 
+/**
+ * This object defines the JobisColor used in Jobis.
+ */
 object JobisColor {
     val Primary100 = Color(0xFF135C9D)
     val Primary200 = Color(0xFF0F4C82)
