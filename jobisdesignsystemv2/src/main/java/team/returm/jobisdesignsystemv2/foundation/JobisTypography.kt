@@ -29,6 +29,9 @@ private val platFormTextStyle = PlatformTextStyle(
     includeFontPadding = false,
 )
 
+/**
+ * JobisTypography defines fontFamily, fontSize, fontWeight, lineHeight and platformStyle in TextStyle.
+ */
 object JobisTypography {
     val PageTitle = TextStyle(
         fontFamily = PretendardFamiliy,
