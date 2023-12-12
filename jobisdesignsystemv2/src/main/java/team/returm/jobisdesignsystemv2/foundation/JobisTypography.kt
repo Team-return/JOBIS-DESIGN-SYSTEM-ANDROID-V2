@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import team.returm.jobisdesignsystemv2.R
 
-private val NotosansFamily = FontFamily(
+private val PretendardFamiliy = FontFamily(
     listOf(
         Font(
             resId = R.font.pretendard_bold,
@@ -31,7 +31,7 @@ private val platFormTextStyle = PlatformTextStyle(
 
 object JobisTypography {
     val PageTitle = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
         lineHeight = 36.sp,
@@ -39,7 +39,7 @@ object JobisTypography {
     )
 
     val HeadLine = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold,
         lineHeight = 28.sp,
@@ -47,7 +47,7 @@ object JobisTypography {
     )
 
     val SubHeadLine = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 16.sp,
         fontWeight = FontWeight.SemiBold,
         lineHeight = 24.sp,
@@ -55,7 +55,7 @@ object JobisTypography {
     )
 
     val Body = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 16.sp,
         fontWeight = FontWeight.Medium,
         lineHeight = 24.sp,
@@ -63,7 +63,7 @@ object JobisTypography {
     )
 
     val SubBody = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 14.sp,
         fontWeight = FontWeight.SemiBold,
         lineHeight = 20.sp,
@@ -71,7 +71,7 @@ object JobisTypography {
     )
 
     val Description = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 14.sp,
         fontWeight = FontWeight.Medium,
         lineHeight = 20.sp,
@@ -79,7 +79,7 @@ object JobisTypography {
     )
 
     val Caption = TextStyle(
-        fontFamily = NotosansFamily,
+        fontFamily = PretendardFamiliy,
         fontSize = 12.sp,
         fontWeight = FontWeight.Medium,
         lineHeight = 16.sp,
