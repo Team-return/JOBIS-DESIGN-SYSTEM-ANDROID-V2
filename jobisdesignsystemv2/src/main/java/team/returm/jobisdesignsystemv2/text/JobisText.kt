@@ -9,6 +9,17 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import team.returm.jobisdesignsystemv2.foundation.JobisColor
 
+/**
+ * This composable function creates a JobisText element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the text.
+ * @param color The color to be applied to the text.
+ * @param text The text to be displayed.
+ * @param style The style to be applied to the text.
+ * @param overflow How visual overflow should be handled.
+ * @param maxLines An optional maximum number of lines
+ * @param textDecoration The decorations to paint on the text (e.g., an underline).
+ */
 @Composable
 fun JobisText(
     modifier: Modifier = Modifier,
