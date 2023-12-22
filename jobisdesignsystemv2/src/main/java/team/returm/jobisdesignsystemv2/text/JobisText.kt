@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import team.returm.jobisdesignsystemv2.foundation.JobisColor
+import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 
 /**
  * This composable function creates a JobisText element for use in Jobis.
@@ -23,7 +23,7 @@ import team.returm.jobisdesignsystemv2.foundation.JobisColor
 @Composable
 fun JobisText(
     modifier: Modifier = Modifier,
-    color: Color = JobisColor.Gray900,
+    color: Color = JobisTheme.colors.onBackground,
     text: String,
     style: TextStyle,
     overflow: TextOverflow = TextOverflow.Ellipsis,
