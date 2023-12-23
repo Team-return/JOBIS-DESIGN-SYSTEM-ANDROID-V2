@@ -71,6 +71,16 @@ private fun BasicIconButton(
     )
 }
 
+/**
+ * This composable function creates a JobisIconButton element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the text.
+ * @param painter To draw inside this icon
+ * @param tint To color inside this icon
+ * @param contentDescription A brief description of what the icon is
+ * @param enabled Whether to disable the button
+ * @param onClick Called when this button is clicked
+ */
 @Composable
 fun JobisIconButton(
     modifier: Modifier = Modifier,
