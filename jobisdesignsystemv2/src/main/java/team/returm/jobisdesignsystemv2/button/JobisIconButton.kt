@@ -16,15 +16,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import team.returm.jobisdesignsystemv2.foundation.JobisColor
 
 @Composable
 private fun BasicIconButton(
     modifier: Modifier,
     painter: Painter,
+    tint: Color,
     contentDescription: String,
     enabled: Boolean,
     onClick: () -> Unit,
@@ -61,9 +64,10 @@ private fun BasicIconButton(
                 scaleX = scale
                 scaleY = scale
             }
-            .padding(6.dp),
+            .padding(4.dp),
         painter = painter,
         contentDescription = contentDescription,
+        tint = tint,
     )
 }
 
@@ -71,6 +75,7 @@ private fun BasicIconButton(
 fun JobisIconButton(
     modifier: Modifier = Modifier,
     painter: Painter,
+    tint: Color = JobisColor.Light.gray600,
     contentDescription: String,
     enabled: Boolean = true,
     onClick: () -> Unit,
@@ -78,6 +83,7 @@ fun JobisIconButton(
     BasicIconButton(
         modifier = modifier,
         painter = painter,
+        tint = tint,
         contentDescription = contentDescription,
         enabled = enabled,
         onClick = onClick,
