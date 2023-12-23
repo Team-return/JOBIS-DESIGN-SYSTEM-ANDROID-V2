@@ -187,9 +187,7 @@ private fun LargeButton(
         } else {
             1f
         },
-        animationSpec = tween(
-            durationMillis = 600,
-        ),
+        animationSpec = tween(durationMillis = 200),
         label = "",
     )
 
@@ -200,7 +198,7 @@ private fun LargeButton(
                 scaleX = scale
                 scaleY = scale
             }
-            .clip(RoundedCornerShape(12.dp)),
+            .clip(buttonShape),
         text = text,
         color = color,
         enabled = enabled,
