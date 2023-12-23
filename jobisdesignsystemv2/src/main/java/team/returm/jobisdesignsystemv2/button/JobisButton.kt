@@ -60,7 +60,7 @@ private fun BasicButton(
             textColor
         },
         animationSpec = tween(
-            durationMillis = 600,
+            durationMillis = 200,
         ),
         label = "",
     )
