@@ -1,10 +1,11 @@
 package team.returm.jobisdesignsystemv2.button
 
+import android.view.MotionEvent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,16 +18,17 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -39,6 +41,7 @@ import team.returm.jobisdesignsystemv2.text.JobisText
 
 private val buttonShape = RoundedCornerShape(12.dp)
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun BasicButton(
     modifier: Modifier,
@@ -50,18 +53,15 @@ private fun BasicButton(
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
 ) {
-    LaunchedEffect(Unit) {
-        interactionSource.interactions.collect {
-            onPressed(it is PressInteraction.Press)
-        }
-    }
-
     val contentColor by animateColorAsState(
         targetValue = if (!enabled) {
             JobisTheme.colors.background
         } else {
             textColor
         },
+        animationSpec = tween(
+            durationMillis = 600,
+        ),
         label = "",
     )
 
@@ -77,12 +77,28 @@ private fun BasicButton(
         color = backgroundColor,
     ) {
         Row(
-            modifier = Modifier.padding(
-                start = 98.dp,
-                end = 86.dp,
-                top = 16.dp,
-                bottom = 16.dp,
-            ),
+            modifier = Modifier
+                .pointerInteropFilter { event ->
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            onPressed(true)
+                            true
+                        }
+
+                        MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                            onPressed(false)
+                            true
+                        }
+
+                        else -> true
+                    }
+                }
+                .padding(
+                    start = 98.dp,
+                    end = 86.dp,
+                    top = 16.dp,
+                    bottom = 16.dp,
+                ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
         ) {
@@ -171,6 +187,9 @@ private fun LargeButton(
         } else {
             1f
         },
+        animationSpec = tween(
+            durationMillis = 600,
+        ),
         label = "",
     )
 
