@@ -84,6 +84,14 @@ private fun BasicTopAppBar(
     }
 }
 
+/**
+ * This composable function creates a JobisSmallTopAppBar element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the JobisSmallTopAppBar.
+ * @param title The title text to be displayed in the app bar.
+ * @param onBackPressed Callback function for handling the back button press.
+ * @param actions An optional composable block to add custom actions to the app bar.
+ */
 @Composable
 fun JobisSmallTopAppBar(
     modifier: Modifier = Modifier,
@@ -104,6 +112,14 @@ fun JobisSmallTopAppBar(
     }
 }
 
+/**
+ * This composable function creates a JobisLargeTopAppBar element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the JobisLargeTopAppBar.
+ * @param title The title text to be displayed in the app bar.
+ * @param onBackPressed Callback function for handling the back button press.
+ * @param actions An optional composable block to add custom actions to the app bar.
+ */
 @Composable
 fun JobisLargeTopAppBar(
     modifier: Modifier = Modifier,
@@ -132,6 +148,15 @@ fun JobisLargeTopAppBar(
     }
 }
 
+/**
+ * This composable function creates a JobisCollapsingTopAppBar element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the JobisCollapsingTopAppBar.
+ * @param title The title text to be displayed in the app bar.
+ * @param scrollState The scroll state to determine the scroll position.
+ * @param onBackPressed Callback function for handling the back button press.
+ * @param actions An optional composable block to add custom actions to the app bar.
+ */
 @Composable
 fun JobisCollapsingTopAppBar(
     modifier: Modifier = Modifier,
