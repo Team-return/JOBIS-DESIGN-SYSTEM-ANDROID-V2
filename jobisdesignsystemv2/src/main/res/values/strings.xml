@@ -21,4 +21,5 @@
     <string name="content_description_plus">추가하기</string>
     <string name="content_description_report">신고하기</string>
     <string name="content_description_search">검색하기</string>
+    <string name="content_description_jobis">앱 바 로고</string>
 </resources>

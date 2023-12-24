@@ -211,9 +211,9 @@ private fun LargeButton(
 /**
  * This composable function creates a JobisButton element for use in Jobis.
  *
- * @param modifier The modifier to be applied to the text.
+ * @param modifier The modifier to be applied to the JobisButton.
  * @param text Text to be written on the button
- * @param color To color inside this icon
+ * @param color To color inside this button
  * @param enabled Whether to disable the button
  * @param onClick Called when this button is clicked
  */
