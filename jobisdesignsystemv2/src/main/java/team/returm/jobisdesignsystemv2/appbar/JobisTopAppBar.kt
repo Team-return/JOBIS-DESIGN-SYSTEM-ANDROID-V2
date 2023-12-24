@@ -50,8 +50,7 @@ private fun BasicTopAppBar(
         contentAlignment = Alignment.TopCenter,
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
