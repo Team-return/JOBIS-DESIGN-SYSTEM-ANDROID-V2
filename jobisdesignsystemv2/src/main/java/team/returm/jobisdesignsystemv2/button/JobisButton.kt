@@ -1,11 +1,7 @@
 package team.returm.jobisdesignsystemv2.button
 
-import android.view.MotionEvent
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -14,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -23,12 +18,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -38,10 +30,11 @@ import team.returm.jobisdesignsystemv2.foundation.JobisIcon
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.foundation.JobisTypography
 import team.returm.jobisdesignsystemv2.text.JobisText
+import team.returm.jobisdesignsystemv2.utils.DURATION_MILLIS
+import team.returm.jobisdesignsystemv2.utils.clickable
 
 private val buttonShape = RoundedCornerShape(12.dp)
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun BasicButton(
     modifier: Modifier,
@@ -49,7 +42,6 @@ private fun BasicButton(
     backgroundColor: Color,
     textColor: Color,
     enabled: Boolean,
-    interactionSource: MutableInteractionSource,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
 ) {
@@ -59,9 +51,7 @@ private fun BasicButton(
         } else {
             textColor
         },
-        animationSpec = tween(
-            durationMillis = 200,
-        ),
+        animationSpec = tween(durationMillis = DURATION_MILLIS),
         label = "",
     )
 
@@ -69,8 +59,7 @@ private fun BasicButton(
         modifier = modifier
             .clickable(
                 enabled = enabled,
-                indication = rememberRipple(),
-                interactionSource = interactionSource,
+                onPressed = onPressed,
                 onClick = onClick,
             ),
         shape = buttonShape,
@@ -78,21 +67,6 @@ private fun BasicButton(
     ) {
         Row(
             modifier = Modifier
-                .pointerInteropFilter { event ->
-                    when (event.action) {
-                        MotionEvent.ACTION_DOWN -> {
-                            onPressed(true)
-                            true
-                        }
-
-                        MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                            onPressed(false)
-                            true
-                        }
-
-                        else -> true
-                    }
-                }
                 .padding(
                     start = 98.dp,
                     end = 86.dp,
@@ -162,10 +136,7 @@ private fun ColoredButton(
         backgroundColor = background,
         textColor = themeColor.text,
         enabled = enabled,
-        interactionSource = remember { MutableInteractionSource() },
-        onPressed = {
-            onPressed(it)
-        },
+        onPressed = onPressed,
         onClick = onClick,
     )
 }
@@ -179,31 +150,16 @@ private fun LargeButton(
     onClick: () -> Unit,
 ) {
     var pressed by remember { mutableStateOf(false) }
-    val onPressed: (pressed: Boolean) -> Unit = { pressed = it }
-
-    val scale by animateFloatAsState(
-        targetValue = if (pressed) {
-            0.98f
-        } else {
-            1f
-        },
-        animationSpec = tween(durationMillis = 200),
-        label = "",
-    )
 
     ColoredButton(
         modifier = modifier
             .fillMaxWidth()
-            .graphicsLayer {
-                scaleX = scale
-                scaleY = scale
-            }
             .clip(buttonShape),
         text = text,
         color = color,
         enabled = enabled,
         pressed = { pressed },
-        onPressed = onPressed,
+        onPressed = { pressed = it },
         onClick = onClick,
     )
 }
@@ -214,7 +170,7 @@ private fun LargeButton(
  * @param modifier The modifier to be applied to the JobisButton.
  * @param text Text to be written on the button
  * @param color To color inside this button
- * @param enabled Whether to disable the button
+ * @param enabled Controls the enabled state.
  * @param onClick Called when this button is clicked
  */
 @Composable
