@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 
-internal const val DURATION_MILLS = 200
+internal const val DURATION_MILLIS = 200
 
 /**
  * This is the ripple upon click used by Jobis.
@@ -41,7 +41,7 @@ fun Modifier.clickable(
         } else {
             1f
         },
-        animationSpec = tween(durationMillis = DURATION_MILLS),
+        animationSpec = tween(durationMillis = DURATION_MILLIS),
         label = "",
     )
 

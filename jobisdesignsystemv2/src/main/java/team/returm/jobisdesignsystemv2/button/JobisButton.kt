@@ -30,7 +30,7 @@ import team.returm.jobisdesignsystemv2.foundation.JobisIcon
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.foundation.JobisTypography
 import team.returm.jobisdesignsystemv2.text.JobisText
-import team.returm.jobisdesignsystemv2.utils.DURATION_MILLS
+import team.returm.jobisdesignsystemv2.utils.DURATION_MILLIS
 import team.returm.jobisdesignsystemv2.utils.clickable
 
 private val buttonShape = RoundedCornerShape(12.dp)
@@ -51,7 +51,7 @@ private fun BasicButton(
         } else {
             textColor
         },
-        animationSpec = tween(durationMillis = DURATION_MILLS),
+        animationSpec = tween(durationMillis = DURATION_MILLIS),
         label = "",
     )
 

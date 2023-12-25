@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import team.returm.jobisdesignsystemv2.foundation.JobisColor
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
-import team.returm.jobisdesignsystemv2.utils.DURATION_MILLS
+import team.returm.jobisdesignsystemv2.utils.DURATION_MILLIS
 import team.returm.jobisdesignsystemv2.utils.clickable
 
 @Composable
@@ -38,7 +38,7 @@ private fun BasicIconButton(
             JobisTheme.colors.background
         },
         label = "",
-        animationSpec = tween(durationMillis = DURATION_MILLS),
+        animationSpec = tween(durationMillis = DURATION_MILLIS),
     )
 
     Icon(
