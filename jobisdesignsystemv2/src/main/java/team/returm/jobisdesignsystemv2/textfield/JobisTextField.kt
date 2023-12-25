@@ -92,6 +92,7 @@ private fun TextField(
     hint: String,
     onValueChange: (String) -> Unit,
     singleLine: Boolean,
+    showEmail: Boolean,
 ) {
     val hintAlpha by animateFloatAsState(
         targetValue = if (value().isEmpty()) {
@@ -136,11 +137,26 @@ private fun TextField(
                         color = JobisTheme.colors.onSurfaceVariant,
                     )
                 }
-                JobisIconButton(
-                    painter = painterResource(id = icon),
-                    contentDescription = stringResource(id = R.string.content_description_eye_off),
-                    onClick = { visible = !visible },
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (showEmail) {
+                        JobisText(
+                            modifier = Modifier
+                                .padding(
+                                    end = 8.dp,
+                                    bottom = 1.dp,
+                                )
+                                .align(Alignment.CenterVertically),
+                            text = "@dsm.hs.kr",
+                            style = style,
+                            color = JobisTheme.colors.onSurfaceVariant,
+                        )
+                    }
+                    JobisIconButton(
+                        painter = painterResource(id = icon),
+                        contentDescription = stringResource(id = R.string.content_description_eye_off),
+                        onClick = { visible = !visible },
+                    )
+                }
             }
         }
     }
@@ -154,7 +170,7 @@ private fun Description(
     informationDescription: String,
     descriptionType: DescriptionType,
 ) {
-    var description = when (descriptionType) {
+    val description = when (descriptionType) {
         DescriptionType.Check -> checkDescription
         DescriptionType.Error -> errorDescription
         else -> informationDescription
@@ -197,6 +213,7 @@ fun JobisTextField(
     titleColor: Color = JobisTheme.colors.onSurface,
     style: TextStyle = JobisTypography.Body,
     singleLine: Boolean = true,
+    showEmail: Boolean = false,
 ) {
     Column(
         modifier = Modifier
@@ -217,6 +234,7 @@ fun JobisTextField(
             hint = hint,
             onValueChange = onValueChange,
             singleLine = singleLine,
+            showEmail = showEmail,
         )
         AnimatedVisibility(
             visible = showDescription(),
