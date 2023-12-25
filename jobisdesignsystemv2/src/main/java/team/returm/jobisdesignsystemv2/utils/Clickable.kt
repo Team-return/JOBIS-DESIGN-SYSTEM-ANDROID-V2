@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,22 +51,24 @@ fun Modifier.clickable(
             scaleY = scale
         }
         .pointerInteropFilter { event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    pressed = true
-                }
+            if (enabled) {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        pressed = true
+                        onPressed(true)
+                    }
 
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    pressed = false
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        pressed = false
+                        onPressed(false)
+                        if (event.action == MotionEvent.ACTION_UP) {
+                            onClick()
+                        }
+                    }
                 }
-
-                else -> {}
+                true
+            } else {
+                true
             }
-            onPressed(pressed)
-            true
         }
-        .clickable(
-            onClick = onClick,
-            enabled = enabled,
-        )
 }
