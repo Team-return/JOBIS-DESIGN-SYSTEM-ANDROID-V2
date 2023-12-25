@@ -25,4 +25,5 @@ object JobisIcon {
     val Plus = R.drawable.ic_plus
     val Report = R.drawable.ic_report
     val Search = R.drawable.ic_search
+    val Information = R.drawable.ic_information
 }
