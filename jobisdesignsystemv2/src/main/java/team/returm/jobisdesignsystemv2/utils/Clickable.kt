@@ -29,7 +29,7 @@ internal const val DURATION_MILLS = 200
 @SuppressLint("ComposableNaming")
 @Composable
 fun Modifier.clickable(
-    enabled: Boolean = true,
+    enabled: Boolean,
     pressDepth: Float = 0.98f,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
@@ -66,9 +66,7 @@ fun Modifier.clickable(
                         }
                     }
                 }
-                true
-            } else {
-                true
             }
+            true
         }
 }
