@@ -12,7 +12,7 @@ import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 /**
  * This composable function creates a JobisText element for use in Jobis.
  *
- * @param modifier The modifier to be applied to the text.
+ * @param modifier The modifier to be applied to the JobisText.
  * @param color The color to be applied to the text.
  * @param text The text to be displayed.
  * @param style The style to be applied to the text.
