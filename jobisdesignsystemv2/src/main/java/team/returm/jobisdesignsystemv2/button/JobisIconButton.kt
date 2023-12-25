@@ -65,7 +65,7 @@ private fun BasicIconButton(
  * @param painter To draw inside this icon
  * @param tint To color inside this icon
  * @param contentDescription A brief description of what the icon is
- * @param enabled Whether to disable the button
+ * @param enabled Controls the enabled state.
  * @param onClick Called when this button is clicked
  */
 @Composable

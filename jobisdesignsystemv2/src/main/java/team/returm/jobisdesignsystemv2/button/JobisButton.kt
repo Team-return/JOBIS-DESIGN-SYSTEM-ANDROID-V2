@@ -170,7 +170,7 @@ private fun LargeButton(
  * @param modifier The modifier to be applied to the text.
  * @param text Text to be written on the button
  * @param color To color inside this icon
- * @param enabled Whether to disable the button
+ * @param enabled Controls the enabled state.
  * @param onClick Called when this button is clicked
  */
 @Composable

@@ -15,6 +15,15 @@ import androidx.compose.ui.unit.dp
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.utils.clickable
 
+/**
+ * This composable function creates a JobisCard element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the JobisCard.
+ * @param shape Defines the surface's shape as well its shadow.
+ * @param background To color inside this card
+ * @param enabled Controls the enabled state.
+ * @param onClick Called when this card is clicked
+ */
 @Composable
 fun JobisCard(
     modifier: Modifier = Modifier,

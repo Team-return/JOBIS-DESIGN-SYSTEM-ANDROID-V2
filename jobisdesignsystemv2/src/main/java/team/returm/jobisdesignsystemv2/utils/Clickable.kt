@@ -17,6 +17,15 @@ import androidx.compose.ui.input.pointer.pointerInteropFilter
 
 internal const val DURATION_MILLS = 200
 
+/**
+ * This is the ripple upon click used by Jobis.
+ *
+ * @param enabled Controls the enabled state.
+ * @param pressDepth Width of view when pressed
+ * @param onPressed Manage the state of the press
+ * @param onClick Called when this button is clicked.
+ * @return Modifier that changed ripple on click
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @SuppressLint("ComposableNaming")
 @Composable
