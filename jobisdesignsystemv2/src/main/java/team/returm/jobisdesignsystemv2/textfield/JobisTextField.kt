@@ -43,6 +43,14 @@ import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.foundation.JobisTypography
 import team.returm.jobisdesignsystemv2.text.JobisText
 
+/**
+ * This class represents what the DescriptionType is.
+ *
+ * @property icon Icon of each description
+ * @property contentDescription type of description
+ * @property tint To color inside this icon
+ * @property color To color inside this description
+ */
 sealed class DescriptionType(
     @DrawableRes val icon: Int,
     @StringRes val contentDescription: Int,
@@ -204,6 +212,25 @@ private fun Description(
     }
 }
 
+/**
+ *  This composable function creates a JobisTextField element for use in Jobis.
+ *
+ * @param modifier The modifier to be applied to the JobisTextField.
+ * @param title Title of text field
+ * @param value The input String text to be shown in the text field
+ * @param hint The hint text to be displayed when the text field is empty.
+ * @param onValueChange A lambda function to be invoked when the text field value changes.
+ * @param showDescription A lambda function that returns a boolean indicating whether to show the description.
+ * @param errorDescription When the input value does not match the regular expression
+ * @param checkDescription When the input value matches a regular expression
+ * @param informationDescription If there is an explanation about regular expressions
+ * @param descriptionType Description for the current value The default is Information.
+ * @param titleStyle The [TextStyle] to be applied to the title.
+ * @param titleColor The color of the title text.
+ * @param style The [TextStyle] to be applied to the text field.
+ * @param singleLine Whether the text field should be a single line or multiline.
+ * @param showEmail Whether to show email-specific features (e.g., @dsm.hs.kr).
+ */
 @Composable
 fun JobisTextField(
     modifier: Modifier = Modifier,
