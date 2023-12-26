@@ -3,6 +3,7 @@ package team.returm.jobisdesignsystemv2.textfield
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -176,24 +177,30 @@ private fun Description(
         else -> informationDescription
     }
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            modifier = Modifier.size(16.dp),
-            painter = painterResource(id = descriptionType.icon),
-            contentDescription = stringResource(id = descriptionType.contentDescription),
-            tint = descriptionType.tint(),
-        )
-        JobisText(
-            text = description,
-            style = JobisTypography.Description,
-            color = descriptionType.color(),
-        )
+    Crossfade(
+        targetState = descriptionType,
+        animationSpec = tween(durationMillis = 300),
+        label = "",
+    ) { targetDescriptionType ->
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                modifier = Modifier.size(16.dp),
+                painter = painterResource(id = targetDescriptionType.icon),
+                contentDescription = stringResource(id = targetDescriptionType.contentDescription),
+                tint = targetDescriptionType.tint(),
+            )
+            JobisText(
+                text = description,
+                style = JobisTypography.Description,
+                color = targetDescriptionType.color(),
+            )
+        }
     }
 }
 
@@ -238,8 +245,8 @@ fun JobisTextField(
         )
         AnimatedVisibility(
             visible = showDescription(),
-            enter = expandVertically(tween(250)) + fadeIn(tween(250)),
-            exit = shrinkVertically(tween(250)) + fadeOut(tween(250)),
+            enter = expandVertically(tween(300)) + fadeIn(tween(300)),
+            exit = shrinkVertically(tween(300)) + fadeOut(tween(300)),
         ) {
             Description(
                 errorDescription = errorDescription,
