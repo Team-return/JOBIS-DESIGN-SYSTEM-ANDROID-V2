@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_jobis_toast"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_jobis_toast"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_toast"
@@ -16,8 +16,8 @@
         android:id="@+id/img_toast_icon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="6dp"
         android:layout_marginTop="1dp"
+        android:layout_marginEnd="6dp"
         android:src="@drawable/ic_check_circle" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_semi_bold"
         android:lineHeight="24dp"
-        android:text="오이런"
+        android:text=""
         android:textColor="#FF000000"
         android:textSize="16sp" />
 

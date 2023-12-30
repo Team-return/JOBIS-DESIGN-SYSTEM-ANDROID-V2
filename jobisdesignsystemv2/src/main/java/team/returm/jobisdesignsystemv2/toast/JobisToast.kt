@@ -11,6 +11,17 @@ import team.returm.jobisdesignsystemv2.R
 import team.returm.jobisdesignsystemv2.foundation.JobisIcon
 
 object JobisToast {
+    /**
+     * Jobis' Custom Toast
+     *
+     * It is a view created in xml and consists of icons and messages.
+     *
+     * @param context Context used in JobisToast.
+     * @param message Message to display in JobisToast
+     * @param duration How much to display
+     * @param drawable Icons to be used in JobisToast
+     * @return customized toast
+     */
     fun create(
         context: Context,
         message: String,
