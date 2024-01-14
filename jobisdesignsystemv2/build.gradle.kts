@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    id("kotlin-android")
+    id("maven-publish")
 }
 
 android {
@@ -35,6 +36,19 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            register("release", MavenPublication::class) {
+                from(components["release"])
+                groupId = "team.return.jobis.android"
+                artifactId = "design-system-v2"
+                version = "1.0.0"
+            }
+        }
     }
 }
 
