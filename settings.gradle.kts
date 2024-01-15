@@ -10,9 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
 }
 
 rootProject.name = "JobisDesignSystemV2"
 include(":app")
- 
+include(":jobisdesignsystemv2")
