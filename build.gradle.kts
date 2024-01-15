@@ -4,3 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
     id("com.android.library") version "7.4.1" apply false
 }
+
+task("clean", Delete::class) {
+    delete = setOf(rootProject.buildDir)
+}
