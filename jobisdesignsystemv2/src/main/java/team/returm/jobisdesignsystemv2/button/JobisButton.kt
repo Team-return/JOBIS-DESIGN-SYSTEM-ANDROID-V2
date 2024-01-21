@@ -68,8 +68,8 @@ private fun BasicButton(
         Row(
             modifier = Modifier
                 .padding(
-                    start = 98.dp,
-                    end = 86.dp,
+                    start = 28.dp,
+                    end = 16.dp,
                     top = 16.dp,
                     bottom = 16.dp,
                 ),
