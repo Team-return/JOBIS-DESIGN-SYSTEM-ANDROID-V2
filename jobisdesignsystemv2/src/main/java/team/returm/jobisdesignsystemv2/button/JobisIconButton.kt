@@ -33,7 +33,7 @@ private fun BasicIconButton(
     var pressed by remember { mutableStateOf(false) }
     val background by animateColorAsState(
         targetValue = if (pressed) {
-            JobisTheme.colors.inverseSurface
+            JobisTheme.colors.surfaceVariant
         } else {
             JobisTheme.colors.background
         },
