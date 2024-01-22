@@ -46,7 +46,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "team.return.jobis.android"
                 artifactId = "design-system-v2"
-                version = "1.0.0"
+                version = "1.0.1"
             }
         }
     }

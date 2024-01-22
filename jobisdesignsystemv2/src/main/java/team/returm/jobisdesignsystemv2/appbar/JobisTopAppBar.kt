@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +20,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,6 +29,7 @@ import team.returm.jobisdesignsystemv2.R
 import team.returm.jobisdesignsystemv2.button.JobisIconButton
 import team.returm.jobisdesignsystemv2.foundation.JobisColor
 import team.returm.jobisdesignsystemv2.foundation.JobisIcon
+import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.foundation.JobisTypography
 import team.returm.jobisdesignsystemv2.text.JobisText
 import java.lang.Float.max
@@ -45,8 +49,7 @@ private fun BasicTopAppBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(JobisColor.Light.gray100)
-            .padding(horizontal = 24.dp),
+            .background(JobisTheme.colors.background),
         contentAlignment = Alignment.TopCenter,
     ) {
         Row(
