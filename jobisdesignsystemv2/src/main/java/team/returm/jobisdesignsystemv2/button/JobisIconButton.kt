@@ -16,7 +16,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import team.returm.jobisdesignsystemv2.foundation.JobisColor
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.utils.DURATION_MILLIS
 import team.returm.jobisdesignsystemv2.utils.clickable
@@ -26,6 +25,7 @@ private fun BasicIconButton(
     modifier: Modifier,
     painter: Painter,
     tint: Color,
+    defaultBackgroundColor: Color,
     contentDescription: String,
     enabled: Boolean,
     onClick: () -> Unit,
@@ -35,7 +35,7 @@ private fun BasicIconButton(
         targetValue = if (pressed) {
             JobisTheme.colors.inverseSurface
         } else {
-            JobisTheme.colors.background
+            defaultBackgroundColor
         },
         label = "",
         animationSpec = tween(durationMillis = DURATION_MILLIS),
@@ -72,7 +72,8 @@ private fun BasicIconButton(
 fun JobisIconButton(
     modifier: Modifier = Modifier,
     painter: Painter,
-    tint: Color = JobisColor.Light.gray600,
+    tint: Color = JobisTheme.colors.onSurfaceVariant,
+    defaultBackgroundColor: Color = JobisTheme.colors.background,
     contentDescription: String,
     enabled: Boolean = true,
     onClick: () -> Unit,
@@ -81,6 +82,7 @@ fun JobisIconButton(
         modifier = modifier,
         painter = painter,
         tint = tint,
+        defaultBackgroundColor = defaultBackgroundColor,
         contentDescription = contentDescription,
         enabled = enabled,
         onClick = onClick,

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -101,7 +102,8 @@ private fun TextField(
     hint: String,
     onValueChange: (String) -> Unit,
     singleLine: Boolean,
-    showEmail: Boolean,
+    showEmailHint: Boolean,
+    showVisibleIcon: Boolean,
 ) {
     val hintAlpha by animateFloatAsState(
         targetValue = if (value().isEmpty()) {
@@ -147,7 +149,7 @@ private fun TextField(
                     )
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    if (showEmail) {
+                    if (showEmailHint) {
                         JobisText(
                             modifier = Modifier
                                 .padding(
@@ -160,11 +162,14 @@ private fun TextField(
                             color = JobisTheme.colors.onSurfaceVariant,
                         )
                     }
-                    JobisIconButton(
-                        painter = painterResource(id = icon),
-                        contentDescription = stringResource(id = R.string.content_description_eye_off),
-                        onClick = { visible = !visible },
-                    )
+                    if (showVisibleIcon) {
+                        JobisIconButton(
+                            painter = painterResource(id = icon),
+                            contentDescription = stringResource(id = R.string.content_description_eye_off),
+                            onClick = { visible = !visible },
+                            defaultBackgroundColor = JobisTheme.colors.inverseSurface,
+                        )
+                    }
                 }
             }
         }
@@ -229,7 +234,7 @@ private fun Description(
  * @param titleColor The color of the title text.
  * @param style The [TextStyle] to be applied to the text field.
  * @param singleLine Whether the text field should be a single line or multiline.
- * @param showEmail Whether to show email-specific features (e.g., @dsm.hs.kr).
+ * @param showEmailHint Whether to show email-specific features (e.g., @dsm.hs.kr).
  */
 @Composable
 fun JobisTextField(
@@ -247,7 +252,8 @@ fun JobisTextField(
     titleColor: Color = JobisTheme.colors.onSurface,
     style: TextStyle = JobisTypography.Body,
     singleLine: Boolean = true,
-    showEmail: Boolean = false,
+    showEmailHint: Boolean = false,
+    showVisibleIcon: Boolean = false,
 ) {
     Column(
         modifier = Modifier
@@ -262,13 +268,14 @@ fun JobisTextField(
             color = titleColor,
         )
         TextField(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth().defaultMinSize(minHeight = 48.dp),
             style = style,
             value = value,
             hint = hint,
             onValueChange = onValueChange,
             singleLine = singleLine,
-            showEmail = showEmail,
+            showEmailHint = showEmailHint,
+            showVisibleIcon = showVisibleIcon,
         )
         AnimatedVisibility(
             visible = showDescription(),
