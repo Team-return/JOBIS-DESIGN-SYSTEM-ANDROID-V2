@@ -50,7 +50,10 @@ private fun BasicIconButton(
                 pressDepth = 0.93f,
                 onPressed = { pressed = it },
             )
-            .background(color = background)
+            .background(
+                color = background,
+                shape = CircleShape,
+            )
             .padding(4.dp),
         painter = painter,
         contentDescription = contentDescription,
