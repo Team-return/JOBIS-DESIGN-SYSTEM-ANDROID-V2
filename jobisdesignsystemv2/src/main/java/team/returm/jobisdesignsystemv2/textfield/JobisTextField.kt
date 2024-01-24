@@ -116,8 +116,8 @@ private fun TextField(
     )
     var visible by remember { mutableStateOf(false) }
     val (visualTransformation, icon) = when (visible) {
-        true -> PasswordVisualTransformation() to JobisIcon.EyeOn
-        else -> VisualTransformation.None to JobisIcon.EyeOff
+        true -> VisualTransformation.None to JobisIcon.EyeOn
+        else -> PasswordVisualTransformation() to JobisIcon.EyeOff
     }
 
     Surface(
