@@ -33,28 +33,19 @@ import team.returm.jobisdesignsystemv2.text.JobisText
 import team.returm.jobisdesignsystemv2.utils.DURATION_MILLIS
 import team.returm.jobisdesignsystemv2.utils.clickable
 
-private val buttonShape = RoundedCornerShape(12.dp)
+private val largeButtonShape = RoundedCornerShape(12.dp)
+private val smallButtonShape = RoundedCornerShape(8.dp)
 
 @Composable
 private fun BasicButton(
     modifier: Modifier,
-    text: String,
     backgroundColor: Color,
-    textColor: Color,
+    shape: RoundedCornerShape,
     enabled: Boolean,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    val contentColor by animateColorAsState(
-        targetValue = if (!enabled) {
-            JobisTheme.colors.background
-        } else {
-            textColor
-        },
-        animationSpec = tween(durationMillis = DURATION_MILLIS),
-        label = "",
-    )
-
     Surface(
         modifier = modifier
             .clickable(
@@ -62,9 +53,108 @@ private fun BasicButton(
                 onPressed = onPressed,
                 onClick = onClick,
             ),
-        shape = buttonShape,
+        shape = shape,
         color = backgroundColor,
-    ) {
+        content = content,
+    )
+}
+
+@Composable
+private fun ColoredButton(
+    modifier: Modifier,
+    color: ButtonColor,
+    shape: RoundedCornerShape,
+    enabled: Boolean,
+    pressed: () -> Boolean,
+    onPressed: (pressed: Boolean) -> Unit,
+    onClick: () -> Unit,
+    content: @Composable (contentColor: Color) -> Unit,
+) {
+    val themeColor = getThemeColor(color = color)
+
+    val background by animateColorAsState(
+        targetValue = if (!enabled) {
+            JobisColor.Light.gray500
+        } else if (pressed()) {
+            themeColor.pressed
+        } else {
+            themeColor.background
+        },
+        label = "",
+    )
+
+    val contentColor by animateColorAsState(
+        targetValue = if (!enabled) {
+            JobisTheme.colors.background
+        } else {
+            themeColor.text
+        },
+        animationSpec = tween(durationMillis = DURATION_MILLIS),
+        label = "",
+    )
+
+    BasicButton(
+        modifier = modifier,
+        backgroundColor = background,
+        shape = shape,
+        enabled = enabled,
+        onPressed = onPressed,
+        onClick = onClick,
+        content = { content(contentColor) },
+    )
+}
+
+@Composable
+private fun getThemeColor(color: ButtonColor) = when (color) {
+    ButtonColor.Primary -> checkDarkTheme(
+        lightColor = ButtonColors.Light.primary(),
+        darkColor = ButtonColors.Dark.primary(),
+    )
+
+    ButtonColor.Secondary -> checkDarkTheme(
+        lightColor = ButtonColors.Light.secondary(),
+        darkColor = ButtonColors.Dark.secondary(),
+    )
+
+    ButtonColor.Default -> checkDarkTheme(
+        lightColor = ButtonColors.Light.default(),
+        darkColor = ButtonColors.Dark.default(),
+    )
+}
+
+@Composable
+private fun checkDarkTheme(
+    lightColor: ButtonColorSet,
+    darkColor: ButtonColorSet,
+): ButtonColorSet {
+    return if (isSystemInDarkTheme()) {
+        darkColor
+    } else {
+        lightColor
+    }
+}
+
+@Composable
+private fun LargeButton(
+    modifier: Modifier,
+    text: String,
+    color: ButtonColor,
+    enabled: Boolean,
+    onClick: () -> Unit,
+) {
+    var pressed by remember { mutableStateOf(false) }
+
+    ColoredButton(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(largeButtonShape),
+        color = color,
+        shape = largeButtonShape,
+        enabled = enabled,
+        pressed = { pressed },
+        onPressed = { pressed = it },
+        onClick = onClick,
+    ) { contentColor ->
         Row(
             modifier = Modifier
                 .padding(
@@ -92,57 +182,7 @@ private fun BasicButton(
 }
 
 @Composable
-private fun ColoredButton(
-    modifier: Modifier,
-    text: String,
-    color: ButtonColor,
-    enabled: Boolean,
-    pressed: () -> Boolean,
-    onPressed: (pressed: Boolean) -> Unit,
-    onClick: () -> Unit,
-) {
-    val themeColor = when (color) {
-        ButtonColor.Primary -> {
-            if (isSystemInDarkTheme()) {
-                ButtonColors.Dark.primary()
-            } else {
-                ButtonColors.Light.primary()
-            }
-        }
-
-        ButtonColor.Default -> {
-            if (isSystemInDarkTheme()) {
-                ButtonColors.Dark.default()
-            } else {
-                ButtonColors.Light.default()
-            }
-        }
-    }
-
-    val background by animateColorAsState(
-        targetValue = if (!enabled) {
-            JobisColor.Light.gray500
-        } else if (pressed()) {
-            themeColor.pressed
-        } else {
-            themeColor.background
-        },
-        label = "",
-    )
-
-    BasicButton(
-        modifier = modifier,
-        text = text,
-        backgroundColor = background,
-        textColor = themeColor.text,
-        enabled = enabled,
-        onPressed = onPressed,
-        onClick = onClick,
-    )
-}
-
-@Composable
-private fun LargeButton(
+private fun SmallButton(
     modifier: Modifier,
     text: String,
     color: ButtonColor,
@@ -152,16 +192,25 @@ private fun LargeButton(
     var pressed by remember { mutableStateOf(false) }
 
     ColoredButton(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(buttonShape),
-        text = text,
+        modifier = modifier.clip(smallButtonShape),
         color = color,
+        shape = smallButtonShape,
         enabled = enabled,
         pressed = { pressed },
         onPressed = { pressed = it },
         onClick = onClick,
-    )
+    ) { contentColor ->
+        JobisText(
+            modifier = Modifier
+                .padding(
+                    horizontal = 8.dp,
+                    vertical = 4.dp,
+                ),
+            text = text,
+            style = JobisTypography.SubBody,
+            color = contentColor,
+        )
+    }
 }
 
 /**
@@ -182,6 +231,23 @@ fun JobisButton(
     onClick: () -> Unit,
 ) {
     LargeButton(
+        modifier = modifier,
+        text = text,
+        color = color,
+        enabled = enabled,
+        onClick = onClick,
+    )
+}
+
+@Composable
+fun JobisSmallButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    color: ButtonColor = ButtonColor.Secondary,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+) {
+    SmallButton(
         modifier = modifier,
         text = text,
         color = color,
