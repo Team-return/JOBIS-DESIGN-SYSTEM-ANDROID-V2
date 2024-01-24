@@ -104,6 +104,7 @@ private fun TextField(
     singleLine: Boolean,
     showEmailHint: Boolean,
     showVisibleIcon: Boolean,
+    content: @Composable () -> Unit,
 ) {
     val hintAlpha by animateFloatAsState(
         targetValue = if (value().isEmpty()) {
@@ -115,8 +116,8 @@ private fun TextField(
     )
     var visible by remember { mutableStateOf(false) }
     val (visualTransformation, icon) = when (visible) {
-        true -> PasswordVisualTransformation() to JobisIcon.EyeOn
-        else -> VisualTransformation.None to JobisIcon.EyeOff
+        true -> VisualTransformation.None to JobisIcon.EyeOn
+        else -> PasswordVisualTransformation() to JobisIcon.EyeOff
     }
 
     Surface(
@@ -162,6 +163,7 @@ private fun TextField(
                             color = JobisTheme.colors.onSurfaceVariant,
                         )
                     }
+                    content()
                     if (showVisibleIcon) {
                         JobisIconButton(
                             painter = painterResource(id = icon),
@@ -254,6 +256,7 @@ fun JobisTextField(
     singleLine: Boolean = true,
     showEmailHint: Boolean = false,
     showVisibleIcon: Boolean = false,
+    content: @Composable () -> Unit = { },
 ) {
     Column(
         modifier = Modifier
@@ -268,7 +271,9 @@ fun JobisTextField(
             color = titleColor,
         )
         TextField(
-            modifier = modifier.fillMaxWidth().defaultMinSize(minHeight = 48.dp),
+            modifier = modifier
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = 48.dp),
             style = style,
             value = value,
             hint = hint,
@@ -276,6 +281,7 @@ fun JobisTextField(
             singleLine = singleLine,
             showEmailHint = showEmailHint,
             showVisibleIcon = showVisibleIcon,
+            content = content,
         )
         AnimatedVisibility(
             visible = showDescription(),
