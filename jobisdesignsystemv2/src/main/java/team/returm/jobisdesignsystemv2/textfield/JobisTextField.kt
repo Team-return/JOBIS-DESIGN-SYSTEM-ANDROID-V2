@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -34,6 +35,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -102,6 +105,9 @@ private fun TextField(
     hint: String,
     onValueChange: (String) -> Unit,
     singleLine: Boolean,
+    imeAction: ImeAction,
+    keyboardType: KeyboardType,
+    maxLength: Int,
     showEmailHint: Boolean,
     showVisibleIcon: Boolean,
     content: @Composable () -> Unit,
@@ -115,9 +121,10 @@ private fun TextField(
         label = "",
     )
     var visible by remember { mutableStateOf(false) }
-    val (visualTransformation, icon) = when (visible) {
-        true -> VisualTransformation.None to JobisIcon.EyeOn
-        else -> PasswordVisualTransformation() to JobisIcon.EyeOff
+    val (visualTransformation, icon) = if (visible || !showVisibleIcon) {
+        VisualTransformation.None to JobisIcon.EyeOn
+    } else {
+        PasswordVisualTransformation() to JobisIcon.EyeOff
     }
 
     Surface(
@@ -126,7 +133,7 @@ private fun TextField(
         color = JobisTheme.colors.inverseSurface,
     ) {
         BasicTextField(
-            value = value(),
+            value = value().take(maxLength),
             onValueChange = onValueChange,
             modifier = Modifier.padding(
                 horizontal = 16.dp,
@@ -135,6 +142,10 @@ private fun TextField(
             textStyle = style,
             singleLine = singleLine,
             visualTransformation = visualTransformation,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = keyboardType,
+                imeAction = imeAction,
+            ),
         ) { innerTextField ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -253,7 +264,10 @@ fun JobisTextField(
     titleStyle: TextStyle = JobisTypography.Description,
     titleColor: Color = JobisTheme.colors.onSurface,
     style: TextStyle = JobisTypography.Body,
+    imeAction: ImeAction = ImeAction.Done,
+    keyboardType: KeyboardType = KeyboardType.Text,
     singleLine: Boolean = true,
+    maxLength: Int = Int.MAX_VALUE,
     showEmailHint: Boolean = false,
     showVisibleIcon: Boolean = false,
     content: @Composable () -> Unit = { },
@@ -279,6 +293,9 @@ fun JobisTextField(
             hint = hint,
             onValueChange = onValueChange,
             singleLine = singleLine,
+            imeAction = imeAction,
+            keyboardType = keyboardType,
+            maxLength = maxLength,
             showEmailHint = showEmailHint,
             showVisibleIcon = showVisibleIcon,
             content = content,
