@@ -12,6 +12,7 @@ data class ButtonColorSet(
 
 enum class ButtonColor {
     Primary,
+    Secondary,
     Default,
 }
 
@@ -22,6 +23,13 @@ internal object ButtonColors {
             background = JobisColor.Light.primary200,
             pressed = JobisColor.Light.primary400,
             text = JobisColor.Light.gray100,
+        )
+
+        @Composable
+        fun secondary() = ButtonColorSet(
+            background = JobisColor.Light.primary100,
+            pressed = JobisColor.Light.gray400,
+            text = JobisColor.Light.primary200,
         )
 
         @Composable
@@ -38,6 +46,13 @@ internal object ButtonColors {
             background = JobisColor.Dark.primary200,
             pressed = JobisColor.Dark.primary200,
             text = JobisColor.Dark.gray100,
+        )
+
+        @Composable
+        fun secondary() = ButtonColorSet(
+            background = JobisColor.Dark.primary100,
+            pressed = JobisColor.Dark.gray300,
+            text = JobisColor.Dark.primary200,
         )
 
         @Composable
