@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 import team.returm.jobisdesignsystemv2.foundation.JobisTypography
 import team.returm.jobisdesignsystemv2.text.JobisText
 
-const val TEXT_TEST_TAG = "TextTest"
+private const val TEXT_TEST_TAG = "TextTest"
 
 /**
  * Verifies that text appears on the display and that styles are applied correctly

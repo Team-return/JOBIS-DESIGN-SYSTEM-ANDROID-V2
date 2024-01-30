@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import team.returm.jobisdesignsystemv2.textfield.DescriptionType
 import team.returm.jobisdesignsystemv2.textfield.JobisTextField
 
-const val TEXT_FIELD_TEST_TAG = "TextTest"
+private const val TEXT_FIELD_TEST_TAG = "TextTest"
 
 /**
  * Verify that the DescriptionType of the textfield is properly changed and hint and title

@@ -13,7 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import team.returm.jobisdesignsystemv2.button.JobisButton
 
-const val BTN_TEST_TAG = "ButtonTest"
+private const val BTN_TEST_TAG = "ButtonTest"
 
 /**
  * Verifies that the button appears on the display and that a click action is performed
