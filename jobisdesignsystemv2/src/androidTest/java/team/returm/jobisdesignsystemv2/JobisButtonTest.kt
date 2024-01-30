@@ -15,19 +15,36 @@ import team.returm.jobisdesignsystemv2.button.JobisButton
 
 const val BTN_TEST_TAG = "ButtonTest"
 
+/**
+ * Verifies that the button appears on the display and that a click action is performed
+ * assertHasClickAction cannot be used because JobisButton does not use the button's onClick
+ * @see JobisButton
+ * @see assertHasClickAction
+ */
 @RunWith(AndroidJUnit4::class)
 class JobisButtonTest {
-    private var clicked = 0
-
     @get:Rule
     val composeRule = createComposeRule()
+    private var clicked = 0
 
-    /**
-     * Verifies that the button appears on the display and that a click action is performed
-     * assertHasClickAction cannot be used because JobisButton does not use the button's onClick
-     * @see JobisButton
-     * @see assertHasClickAction
-     */
+    @Test
+    fun enabledJobisButtonTest() {
+        composeRule.setContent {
+            JobisButton(
+                modifier = Modifier.testTag(BTN_TEST_TAG),
+                text = BTN_TEST_TAG,
+                onClick = { clicked++ },
+                enabled = false,
+            )
+        }
+        composeRule
+            .onNodeWithTag(BTN_TEST_TAG)
+            .assertIsDisplayed()
+            .performClick()
+
+        composeRule.runOnIdle { assert(clicked == 0) }
+    }
+
     @Test
     fun jobisButtonTest() {
         composeRule.setContent {
@@ -35,6 +52,7 @@ class JobisButtonTest {
                 modifier = Modifier.testTag(BTN_TEST_TAG),
                 text = BTN_TEST_TAG,
                 onClick = { clicked++ },
+                enabled = true,
             )
         }
         composeRule
