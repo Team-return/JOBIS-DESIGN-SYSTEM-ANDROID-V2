@@ -38,6 +38,7 @@ internal object AppBarPaddings {
 @Composable
 private fun BasicTopAppBar(
     modifier: Modifier,
+    showLogo: Boolean,
     onBackPressed: (() -> Unit)?,
     actions: (@Composable RowScope.() -> Unit)?,
     title: @Composable BoxScope.() -> Unit,
@@ -53,23 +54,20 @@ private fun BasicTopAppBar(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            when (onBackPressed) {
-                null -> {
-                    Image(
-                        modifier = Modifier.padding(vertical = 12.dp),
-                        painter = painterResource(id = R.drawable.img_jobis),
-                        contentDescription = stringResource(id = R.string.content_description_jobis),
-                    )
-                }
-
-                else -> {
-                    JobisIconButton(
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        painter = painterResource(id = JobisIcon.Arrow),
-                        contentDescription = stringResource(id = R.string.content_description_arrow),
-                        onClick = onBackPressed,
-                    )
-                }
+            if(showLogo){
+                Image(
+                    modifier = Modifier.padding(vertical = 12.dp),
+                    painter = painterResource(id = R.drawable.img_jobis),
+                    contentDescription = stringResource(id = R.string.content_description_jobis),
+                )
+            }
+            onBackPressed?.run {
+                JobisIconButton(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    painter = painterResource(id = JobisIcon.Arrow),
+                    contentDescription = stringResource(id = R.string.content_description_arrow),
+                    onClick = onBackPressed,
+                )
             }
             actions?.run {
                 Row(
@@ -95,11 +93,13 @@ private fun BasicTopAppBar(
 fun JobisSmallTopAppBar(
     modifier: Modifier = Modifier,
     title: String = "",
+    showLogo: Boolean = false,
     onBackPressed: (() -> Unit)? = null,
     actions: (@Composable RowScope.() -> Unit)? = null,
 ) {
     BasicTopAppBar(
         modifier = modifier,
+        showLogo = showLogo,
         onBackPressed = onBackPressed,
         actions = actions,
     ) {
@@ -123,11 +123,13 @@ fun JobisSmallTopAppBar(
 fun JobisLargeTopAppBar(
     modifier: Modifier = Modifier,
     title: String = "",
+    showLogo: Boolean = false,
     onBackPressed: (() -> Unit)? = null,
     actions: (@Composable RowScope.() -> Unit)? = null,
 ) {
     BasicTopAppBar(
         modifier = modifier,
+        showLogo = showLogo,
         onBackPressed = onBackPressed,
         actions = actions,
     ) {
@@ -160,6 +162,7 @@ fun JobisLargeTopAppBar(
 fun JobisCollapsingTopAppBar(
     modifier: Modifier = Modifier,
     title: String = "",
+    showLogo: Boolean = false,
     scrollState: ScrollState,
     onBackPressed: (() -> Unit)? = null,
     actions: (@Composable RowScope.() -> Unit)? = null,
@@ -196,6 +199,7 @@ fun JobisCollapsingTopAppBar(
 
     BasicTopAppBar(
         modifier = modifier,
+        showLogo = showLogo,
         onBackPressed = onBackPressed,
         actions = actions,
     ) {
