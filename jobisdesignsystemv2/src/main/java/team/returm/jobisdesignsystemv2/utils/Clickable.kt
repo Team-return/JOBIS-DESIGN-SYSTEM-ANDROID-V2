@@ -16,6 +16,9 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 
 internal const val DURATION_MILLIS = 200
+internal const val DEFAULT_PRESS_DEPTH = 0.98f
+internal const val MIN_PRESS_DEPTH = 1f
+internal const val DEFAULT_DISABLED_MILLIS = 300L
 
 /**
  * This is the ripple upon click used by Jobis.
@@ -32,10 +35,10 @@ internal const val DURATION_MILLIS = 200
 @Composable
 fun Modifier.clickable(
     enabled: Boolean,
-    pressDepth: Float = 0.98f,
+    pressDepth: Float = DEFAULT_PRESS_DEPTH,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
-    disabledMillis: Long = 300L,
+    disabledMillis: Long = DEFAULT_DISABLED_MILLIS,
 ): Modifier {
     var pressed by remember { mutableStateOf(false) }
     var lastClick by remember { mutableLongStateOf(0L) }
@@ -55,17 +58,16 @@ fun Modifier.clickable(
             scaleY = scale
         }
         .pointerInteropFilter { event ->
-            if (enabled && System.currentTimeMillis() - lastClick >= disabledMillis) {
+            if (enabled) {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         pressed = true
                         onPressed(true)
                     }
-
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                         pressed = false
                         onPressed(false)
-                        if (event.action == MotionEvent.ACTION_UP) {
+                        if (event.action == MotionEvent.ACTION_UP && System.currentTimeMillis() - lastClick >= disabledMillis) {
                             lastClick = System.currentTimeMillis()
                             onClick()
                         }
