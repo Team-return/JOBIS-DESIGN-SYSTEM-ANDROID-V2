@@ -4,9 +4,11 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -30,8 +31,11 @@ import team.returm.jobisdesignsystemv2.foundation.JobisIcon
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
 import team.returm.jobisdesignsystemv2.foundation.JobisTypography
 import team.returm.jobisdesignsystemv2.text.JobisText
+import team.returm.jobisdesignsystemv2.utils.DEFAULT_PRESS_DEPTH
 import team.returm.jobisdesignsystemv2.utils.DURATION_MILLIS
+import team.returm.jobisdesignsystemv2.utils.MIN_PRESS_DEPTH
 import team.returm.jobisdesignsystemv2.utils.clickable
+import team.returm.jobisdesignsystemv2.utils.keyboardAsState
 
 private val largeButtonShape = RoundedCornerShape(12.dp)
 private val smallButtonShape = RoundedCornerShape(8.dp)
@@ -46,14 +50,35 @@ private fun BasicButton(
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
+    val keyboardShow by keyboardAsState()
+    val padding = if (keyboardShow) {
+        PaddingValues(
+            vertical = 0.dp,
+            horizontal = 0.dp,
+        )
+    } else {
+        PaddingValues(
+            vertical = 12.dp,
+            horizontal = 24.dp,
+        )
+    }
+    val (shapeByKeyboardShow, pressDepth) = if (keyboardShow) {
+        RoundedCornerShape(0.dp) to MIN_PRESS_DEPTH
+    } else {
+        shape to DEFAULT_PRESS_DEPTH
+    }
+
     Surface(
         modifier = modifier
             .clickable(
+                pressDepth = pressDepth,
                 enabled = enabled,
                 onPressed = onPressed,
                 onClick = onClick,
-            ),
-        shape = shape,
+            )
+            .padding(padding)
+            .imePadding(),
+        shape = shapeByKeyboardShow,
         color = backgroundColor,
         content = content,
     )
@@ -145,9 +170,7 @@ private fun LargeButton(
     var pressed by remember { mutableStateOf(false) }
 
     ColoredButton(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(largeButtonShape),
+        modifier = modifier.fillMaxWidth(),
         color = color,
         shape = largeButtonShape,
         enabled = enabled,
@@ -192,7 +215,7 @@ private fun SmallButton(
     var pressed by remember { mutableStateOf(false) }
 
     ColoredButton(
-        modifier = modifier.clip(smallButtonShape),
+        modifier = modifier,
         color = color,
         shape = smallButtonShape,
         enabled = enabled,
