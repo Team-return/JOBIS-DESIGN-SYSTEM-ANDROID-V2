@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import team.returm.jobisdesignsystemv2.foundation.JobisTheme
@@ -28,6 +29,7 @@ fun JobisText(
     style: TextStyle,
     overflow: TextOverflow = TextOverflow.Ellipsis,
     maxLines: Int = Int.MAX_VALUE,
+    textAlign: TextAlign? = null,
     textDecoration: TextDecoration = TextDecoration.None,
 ) {
     Text(
@@ -37,6 +39,7 @@ fun JobisText(
         style = style,
         overflow = overflow,
         maxLines = maxLines,
+        textAlign = textAlign,
         textDecoration = textDecoration,
     )
 }
