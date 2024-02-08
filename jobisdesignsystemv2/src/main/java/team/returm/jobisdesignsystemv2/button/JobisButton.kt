@@ -40,19 +40,27 @@ import team.returm.jobisdesignsystemv2.utils.keyboardAsState
 private val largeButtonShape = RoundedCornerShape(12.dp)
 private val smallButtonShape = RoundedCornerShape(8.dp)
 
+private enum class ButtonType {
+    LARGE,
+    SMALL,
+}
+
 @Composable
 private fun BasicButton(
     modifier: Modifier,
     backgroundColor: Color,
     shape: RoundedCornerShape,
     enabled: Boolean,
+    buttonType: ButtonType,
     keyboardInteractionEnabled: Boolean,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     val keyboardShow by keyboardAsState()
-    val padding = if (keyboardShow && keyboardInteractionEnabled) {
+    val isKeyboardHideButton =
+        keyboardShow && keyboardInteractionEnabled
+    val padding = if (isKeyboardHideButton || buttonType == ButtonType.SMALL) {
         PaddingValues(
             vertical = 0.dp,
             horizontal = 0.dp,
@@ -63,7 +71,7 @@ private fun BasicButton(
             horizontal = 24.dp,
         )
     }
-    val (shapeByKeyboardShow, pressDepth) = if (keyboardShow && keyboardInteractionEnabled) {
+    val (shapeByKeyboardShow, pressDepth) = if (isKeyboardHideButton) {
         RoundedCornerShape(0.dp) to MIN_PRESS_DEPTH
     } else {
         shape to DEFAULT_PRESS_DEPTH
@@ -91,6 +99,7 @@ private fun ColoredButton(
     color: ButtonColor,
     shape: RoundedCornerShape,
     enabled: Boolean,
+    buttonType: ButtonType,
     keyboardInteractionEnabled: Boolean,
     pressed: () -> Boolean,
     onPressed: (pressed: Boolean) -> Unit,
@@ -125,6 +134,7 @@ private fun ColoredButton(
         backgroundColor = background,
         shape = shape,
         enabled = enabled,
+        buttonType = buttonType,
         keyboardInteractionEnabled = keyboardInteractionEnabled,
         onPressed = onPressed,
         onClick = onClick,
@@ -178,6 +188,7 @@ private fun LargeButton(
         color = color,
         shape = largeButtonShape,
         enabled = enabled,
+        buttonType = ButtonType.LARGE,
         keyboardInteractionEnabled = keyboardInteractionEnabled,
         pressed = { pressed },
         onPressed = { pressed = it },
@@ -225,6 +236,7 @@ private fun SmallButton(
         color = color,
         shape = smallButtonShape,
         enabled = enabled,
+        buttonType = ButtonType.SMALL,
         keyboardInteractionEnabled = keyboardInteractionEnabled,
         pressed = { pressed },
         onPressed = { pressed = it },
