@@ -46,7 +46,8 @@ private fun BasicTopAppBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(JobisTheme.colors.background),
+            .background(JobisTheme.colors.background)
+            .padding(horizontal = 24.dp),
         contentAlignment = Alignment.TopCenter,
     ) {
         Row(
