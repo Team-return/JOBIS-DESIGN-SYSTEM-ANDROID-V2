@@ -46,12 +46,13 @@ private fun BasicButton(
     backgroundColor: Color,
     shape: RoundedCornerShape,
     enabled: Boolean,
+    keyboardInteractionEnabled: Boolean,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
 ) {
     val keyboardShow by keyboardAsState()
-    val padding = if (keyboardShow) {
+    val padding = if (keyboardShow && keyboardInteractionEnabled) {
         PaddingValues(
             vertical = 0.dp,
             horizontal = 0.dp,
@@ -62,7 +63,7 @@ private fun BasicButton(
             horizontal = 24.dp,
         )
     }
-    val (shapeByKeyboardShow, pressDepth) = if (keyboardShow) {
+    val (shapeByKeyboardShow, pressDepth) = if (keyboardShow && keyboardInteractionEnabled) {
         RoundedCornerShape(0.dp) to MIN_PRESS_DEPTH
     } else {
         shape to DEFAULT_PRESS_DEPTH
@@ -77,7 +78,7 @@ private fun BasicButton(
                 onClick = onClick,
             )
             .padding(padding)
-            .imePadding(),
+            .then(if (keyboardInteractionEnabled) Modifier.imePadding() else Modifier),
         shape = shapeByKeyboardShow,
         color = backgroundColor,
         content = content,
@@ -90,6 +91,7 @@ private fun ColoredButton(
     color: ButtonColor,
     shape: RoundedCornerShape,
     enabled: Boolean,
+    keyboardInteractionEnabled: Boolean,
     pressed: () -> Boolean,
     onPressed: (pressed: Boolean) -> Unit,
     onClick: () -> Unit,
@@ -123,6 +125,7 @@ private fun ColoredButton(
         backgroundColor = background,
         shape = shape,
         enabled = enabled,
+        keyboardInteractionEnabled = keyboardInteractionEnabled,
         onPressed = onPressed,
         onClick = onClick,
         content = { content(contentColor) },
@@ -165,6 +168,7 @@ private fun LargeButton(
     text: String,
     color: ButtonColor,
     enabled: Boolean,
+    keyboardInteractionEnabled: Boolean,
     onClick: () -> Unit,
 ) {
     var pressed by remember { mutableStateOf(false) }
@@ -174,6 +178,7 @@ private fun LargeButton(
         color = color,
         shape = largeButtonShape,
         enabled = enabled,
+        keyboardInteractionEnabled = keyboardInteractionEnabled,
         pressed = { pressed },
         onPressed = { pressed = it },
         onClick = onClick,
@@ -210,6 +215,7 @@ private fun SmallButton(
     text: String,
     color: ButtonColor,
     enabled: Boolean,
+    keyboardInteractionEnabled: Boolean,
     onClick: () -> Unit,
 ) {
     var pressed by remember { mutableStateOf(false) }
@@ -219,6 +225,7 @@ private fun SmallButton(
         color = color,
         shape = smallButtonShape,
         enabled = enabled,
+        keyboardInteractionEnabled = keyboardInteractionEnabled,
         pressed = { pressed },
         onPressed = { pressed = it },
         onClick = onClick,
@@ -251,6 +258,7 @@ fun JobisButton(
     text: String,
     color: ButtonColor = ButtonColor.Default,
     enabled: Boolean = true,
+    keyboardInteractionEnabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     LargeButton(
@@ -258,6 +266,7 @@ fun JobisButton(
         text = text,
         color = color,
         enabled = enabled,
+        keyboardInteractionEnabled = keyboardInteractionEnabled,
         onClick = onClick,
     )
 }
@@ -268,6 +277,7 @@ fun JobisSmallButton(
     text: String,
     color: ButtonColor = ButtonColor.Secondary,
     enabled: Boolean = true,
+    keyboardInteractionEnabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     SmallButton(
@@ -275,6 +285,7 @@ fun JobisSmallButton(
         text = text,
         color = color,
         enabled = enabled,
+        keyboardInteractionEnabled = keyboardInteractionEnabled,
         onClick = onClick,
     )
 }
