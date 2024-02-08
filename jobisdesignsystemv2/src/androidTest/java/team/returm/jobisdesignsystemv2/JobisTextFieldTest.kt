@@ -55,7 +55,7 @@ class JobisTextFieldTest {
                 informationDescription = informationDescription,
                 descriptionType = type,
                 showDescription = { true },
-                modifier = Modifier.clickable { text = "text" }
+                modifier = Modifier.clickable { text = "text" },
             )
         }
 

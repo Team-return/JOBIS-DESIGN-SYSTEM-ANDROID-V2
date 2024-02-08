@@ -31,7 +31,7 @@ class JobisTextTest {
             JobisText(
                 text = TEXT_TEST_TAG,
                 style = style,
-                modifier = Modifier.clickable { style = JobisTypography.Caption }
+                modifier = Modifier.clickable { style = JobisTypography.Caption },
             )
         }
         val test = composeRule.onNodeWithText(TEXT_TEST_TAG).assertIsDisplayed()

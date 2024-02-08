@@ -55,7 +55,7 @@ private fun BasicTopAppBar(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if(showLogo){
+            if (showLogo) {
                 Image(
                     modifier = Modifier.padding(vertical = 12.dp),
                     painter = painterResource(id = R.drawable.img_jobis),
