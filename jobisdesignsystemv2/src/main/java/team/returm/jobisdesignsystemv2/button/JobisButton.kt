@@ -262,6 +262,7 @@ private fun SmallButton(
  * @param text Text to be written on the button
  * @param color To color inside this button
  * @param enabled Controls the enabled state.
+ * @param keyboardInteractionEnabled Determines whether the button interacts with the keyboard or not
  * @param onClick Called when this button is clicked
  */
 @Composable
